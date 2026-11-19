@@ -138,6 +138,3 @@ Attack activity generated from the Kali VM to validate each detection:
 - [ ] Integrate Windows Firewall logging for additional network visibility
 - [ ] Explore Splunk alerting/notable events for automated response triggers
 
----
-
-*This lab was built for educational purposes in an isolated, non-production environment.*

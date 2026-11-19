@@ -1,7 +1,0 @@
-// Detects network reconnaissance (e.g. Nmap scans) via Sysmon Event ID 3 (Network Connection)
-// Flags sources connecting to an unusually high number of distinct destination ports
-// MITRE ATT&CK: T1046 - Network Service Discovery
-
-index=endpoint source="*Sysmon*" EventCode=3
-| stats dc(DestinationPort) as unique_ports count by SourceIp, DestinationIp
-| where unique_ports > 20

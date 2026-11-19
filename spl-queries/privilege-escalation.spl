@@ -1,0 +1,8 @@
+// Detects non-system accounts being granted high-risk privileges (Event ID 4672)
+// Filters out expected SYSTEM/LOCAL SERVICE/NETWORK SERVICE noise
+// MITRE ATT&CK: T1068 - Exploitation for Privilege Escalation
+
+index=endpoint EventCode=4672
+| search NOT Account_Name IN ("SYSTEM", "LOCAL SERVICE", "NETWORK SERVICE")
+| search Privileges="*SeDebugPrivilege*" OR Privileges="*SeImpersonatePrivilege*" OR Privileges="*SeTcbPrivilege*"
+| table _time, Account_Name, Source_Network_Address, Privileges

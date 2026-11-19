@@ -1,0 +1,7 @@
+// Detects repeated failed logon attempts (Event ID 4625) within a 1-minute window
+// MITRE ATT&CK: T1110 - Brute Force
+
+index=endpoint EventCode=4625
+| bucket _time span=1m
+| stats count by _time, Account_Name, Source_Network_Address
+| where count >= 5
